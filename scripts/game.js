@@ -85,7 +85,38 @@ function reset() {
   userOption = "";
   result = "";
   resultText = "";
-  displayElement.innerHTML = "";
-  displayElement.remove(movesElement);
-  displayElement.remove(resultElement);
+  // displayElement.innerHTML = "";
+  // displayElement.remove(movesElement);
+  // displayElement.remove(resultElement);
+  // titleElement = "";
+  // startElement = "";
+  // drawElement = document.getElementById("draw");
+  drawElement.innerHTML = "";
+  drawElement.remove(drawNameBox());
+  drawElement.remove(drawSelection());
+  drawElement.remove(drawDisplay());
+  drawElement.remove(drawReset());
+  resetUI();
+}
+// Run all the resets
+function resetUI () {
+  resetTitle();
+  resetStart();
+  resetDraw();
+  resetDisplay();
+}
+// Changes the title on the UI
+function resetTitle () {
+    titleElement.innerHTML = "Welcome!";
+}
+// Place back the start button to the UI
+function resetStart () {
+    startElement.innerHTML = `<br/>
+                              <button onclick="start()">Start</button>`;
+}
+function resetDraw () {
+    drawElement.innerHTML = "";
+}
+function resetDisplay () {
+    displayElement.innerHTML = "";
 }
