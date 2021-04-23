@@ -80,6 +80,11 @@ function outcome() {
   }
 }
 function reset() {
+  resetInput();
+  resetUI();
+}
+// Run all the resets
+function resetInput () {
   userName = "Bob";
   botOption = "";
   userOption = "";
@@ -88,17 +93,15 @@ function reset() {
   // displayElement.innerHTML = "";
   // displayElement.remove(movesElement);
   // displayElement.remove(resultElement);
-  // titleElement = "";
-  // startElement = "";
+  // titleElement.innerHTML = "";
+  // startElement.innerHTML = "";
   // drawElement = document.getElementById("draw");
-  drawElement.innerHTML = "";
-  drawElement.remove(drawNameBox());
-  drawElement.remove(drawSelection());
-  drawElement.remove(drawDisplay());
-  drawElement.remove(drawReset());
-  resetUI();
+  // drawElement.innerHTML = "";
+  // drawElement.remove(drawNameBox());
+  // drawElement.remove(drawSelection());
+  // drawElement.remove(drawDisplay());
+  // drawElement.remove(drawReset());
 }
-// Run all the resets
 function resetUI () {
   resetTitle();
   resetStart();
@@ -114,9 +117,11 @@ function resetStart () {
     startElement.innerHTML = `<br/>
                               <button onclick="start()">Start</button>`;
 }
+// Add back the div
 function resetDraw () {
     drawElement.innerHTML = "";
 }
+// Add back the div
 function resetDisplay () {
     displayElement.innerHTML = "";
 }
