@@ -1,7 +1,8 @@
 // establish the elements that will be edited
-let title = document.getElementById("title").innerHTML;
-let start = document.getElementById("start").innerHTML;
-let draw = document.getElementById("draw").innerHTML;
+let titleElement = document.getElementById("title");
+let startElement = document.getElementById("start");
+let drawElement = document.getElementById("draw");
+let displayElement = document.getElementById("display");
 
 // pressing start will change the screen.
 // Replacing the title, remove the start button, and draw the new interface.
@@ -13,37 +14,37 @@ function start() {
 
 // Changes the title on the UI
 function changeTitle() {
-    title = "Rock Paper Scissors";
+    titleElement.innerHTML = "Rock Paper Scissors";
 }
 
 // Removes the start button from the UI
 function removeUI() {
-    start = "";
+    startElement.innerHTML = "<br/>";
 }
 
 // Draws the entire game, by writing in all the new codes.
-function drawUI {
+function drawUI() {
     // Define draw and drawElement
-    draw = "";
+    const displayElement = document.getElementById("display");
     drawElement.innerHTML = "";
-    // Run the 3 functions to setup the codes.
-    drawNameBox();
-    drawSelection();
-    drawDisplay();
     // Add the codes to be displayed on the user interfaces.
-    drawElement.appendChild(drawNameBox);
-    drawElement.appendChild(drawSelection);
-    drawElement.appendChild(drawDisplay);
+    drawElement.appendChild(drawNameBox());
+    drawElement.appendChild(drawSelection());
+    drawElement.appendChild(drawDisplay());
+    drawElement.appendChild(drawReset());
 }
+
 // Setup the codes that would be written to draw the name box.
-function drawNameBox(){
+function drawNameBox() {
     let nameBox = document.createElement("p");
     let input = `<input id="user" type="text" value="" placeholder="Enter Name" />`;
     let button = `<button onclick="enterName()">Enter</button>`;
     nameBox.innerHTML = `${input} ${button}`;
+    return nameBox;
 }
+
 // Setup the codes that would be written to draw the selection interfaces.
-function drawSelection(){
+function drawSelection() {
     let selection = document.createElement("p");
     let select = `<p>Please select Rock, Paper, or Scissors.</p>`;
     let rock = `<button onclick="game('Rock')">
@@ -56,9 +57,17 @@ function drawSelection(){
                     <img src="https://static.thenounproject.com/png/88666-200.png" width="50" alt="Scissors."/>
                     </button>`;
     selection.innerHTML = `${select} ${rock} ${paper} ${scissors}`;
+    return selection;
 }
 // Setup the codes that would be written to draw the display portions.
 function drawDisplay() {
     let displayElement = document.createElement("p");
     displayElement.innerHTML=`<p id="display"></p>`;
+    return displayElement;
+}
+// Setup the codes that would be written to draw the reset button.
+function drawReset() {
+    let resetElement = document.createElement("p");
+    resetElement.innerHTML=`<button onclick="reset()">Main Menu</button>`;
+    return resetElement;
 }
