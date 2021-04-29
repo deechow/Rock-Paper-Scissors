@@ -3,6 +3,10 @@ let botOption = "";
 let userOption = "";
 let result = "";
 let resultText = "";
+let endResultText = "";
+let userScore = 0;
+let botScore = 0;
+let round = 0;
 
 function enterName() {
   userName = document.getElementById("user").value;
@@ -14,6 +18,7 @@ function game(option) {
   outcome();
   getResult();
   drawUIGame();
+  checkScore();
 }
 
 function getResult() {
@@ -36,8 +41,12 @@ function drawUIGame() {
   let resultElement = document.createElement("p");
   resultElement.innerHTML = resultText;
 
+  let scoreElement = document.createElement("p");
+  scoreElement.innerHTML = `${userName}: ${userScore}/${round}`;
+
   displayElement.appendChild(movesElement);
   displayElement.appendChild(resultElement);
+  displayElement.appendChild(scoreElement);
 }
 
 function bot() {
@@ -58,27 +67,79 @@ function outcome() {
       result = "tie";
     } else if (botOption === "Paper") {
       result = "bot";
+      botScore += 1;
+      round += 1;
     } else {
       result = "user";
+      userScore += 1;
+      round += 1;
     }
   } else if (userOption === "Paper") {
     if (botOption === "Rock") {
       result = "user";
+      userScore += 1;
+      round += 1;
     } else if (botOption === "Paper") {
       result = "tie";
     } else {
       result = "bot";
+      botScore += 1;
+      round += 1;
     }
   } else {
     if (botOption === "Rock") {
       result = "bot";
+      botScore += 1;
+      round += 1;
     } else if (botOption === "Paper") {
       result = "user";
+      userScore += 1;
+      round += 1;
     } else {
       result = "tie";
     }
   }
 }
+// Best out of Three
+function checkScore() {
+  if (userScore === 3||botScore === 3) {
+    getFinalScore();
+    drawEndUI();
+    resetDraw();
+    resetDisplay ();
+  }
+}
+
+// update the text to state if the player wins or loses.
+function getFinalScore() {
+  if (userScore === 3) {
+    endResultText = `${userName} Wins!`
+  }
+  else {
+    endResultText = `${userName} Loses.`
+  }
+}
+
+//Add onto the UI at the bottom, displaying the final results, the game is over, and to play again.
+function drawEndUI() {
+  const resetElement = document.getElementById("reset");
+  resetElement.innerHTML = "";
+
+  let endElement = document.createElement("p");
+  endElement.innerHTML = `${endResultText}`;
+  
+  let textElement = document.createElement("p");
+  textElement.innerHTML = `Game Over.`;
+
+  let buttonElement = document.createElement("p");
+  buttonElement.innerHTML = `<button onclick ="reset()">Play Again</button>`
+
+  resetElement.appendChild(endElement);
+  resetElement.appendChild(textElement);
+  resetElement.appendChild(buttonElement);
+}
+
+// Reseting the Game
 function reset() {
   resetInput();
   resetUI();
@@ -90,6 +151,10 @@ function resetInput () {
   userOption = "";
   result = "";
   resultText = "";
+  endResultText = "";
+  userScore = 0;
+  botScore = 0;
+  round = 0;
   // displayElement.innerHTML = "";
   // displayElement.remove(movesElement);
   // displayElement.remove(resultElement);
@@ -105,8 +170,7 @@ function resetInput () {
 function resetUI () {
   resetTitle();
   resetStart();
-  resetDraw();
-  resetDisplay();
+  resetReset();
 }
 // Changes the title on the UI
 function resetTitle () {
@@ -124,4 +188,7 @@ function resetDraw () {
 // Add back the div
 function resetDisplay () {
     displayElement.innerHTML = "";
+}
+function resetReset () {
+    resetElement.innerHTML = "";
 }

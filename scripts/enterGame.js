@@ -3,6 +3,7 @@ let titleElement = document.getElementById("title");
 let startElement = document.getElementById("start");
 let drawElement = document.getElementById("draw");
 let displayElement = document.getElementById("display");
+let resetElement = document.getElementById("reset");
 
 // pressing start will change the screen.
 // Replacing the title, remove the start button, and draw the new interface.
@@ -30,8 +31,8 @@ function drawUI() {
     // Add the codes to be displayed on the user interfaces.
     drawElement.appendChild(drawNameBox());
     drawElement.appendChild(drawSelection());
-    drawElement.appendChild(drawDisplay());
-    drawElement.appendChild(drawReset());
+    displayElement.appendChild(drawDisplay());
+    resetElement.appendChild(drawReset());
 }
 
 // Setup the codes that would be written to draw the name box.
@@ -46,7 +47,8 @@ function drawNameBox() {
 // Setup the codes that would be written to draw the selection interfaces.
 function drawSelection() {
     let selection = document.createElement("p");
-    let select = `<p>Please select Rock, Paper, or Scissors.</p>`;
+    let select = `<p>Best out of three!</p>
+                  <p>Please select Rock, Paper, or Scissors.</p>`;
     let rock = `<button onclick="game('Rock')">
                 <img src="https://static.thenounproject.com/png/477914-200.png" width="50" alt="Rock."/>
                 </button>`;
@@ -65,9 +67,10 @@ function drawDisplay() {
     displayElement.innerHTML=`<p id="display"></p>`;
     return displayElement;
 }
-// Setup the codes that would be written to draw the reset button.
+// Setup the codes that would be written to draw the end display.
 function drawReset() {
     let resetElement = document.createElement("p");
-    resetElement.innerHTML=`<button onclick="reset()">Main Menu</button>`;
+    resetElement.innerHTML=`<p id="reset"></p>`;
+    // resetElement.innerHTML=`<button onclick="reset()">Main Menu</button>`;
     return resetElement;
 }
